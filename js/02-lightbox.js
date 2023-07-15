@@ -1,7 +1,7 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-console.log("galleryItems:",galleryItems);
+console.log("galleryItems:", galleryItems);
 
 const gallery = document.querySelector(".gallery");
 
@@ -22,15 +22,9 @@ function createMarkup(arr) {
     </li>`;
     })
     .join("");
-};
+}
 
 // додаю розмітку до html сторінки:
 gallery.insertAdjacentHTML("beforeend", createMarkup(galleryItems));
 
-// додаємо прослуховувача подій на клік по картці:
-gallery.addEventListener("click", clickOnImg());
-
-// функція відкриття модалки:
-function clickOnImg(){
-    let lightbox = new SimpleLightbox('.gallery a',{captionsData: `alt`, captionDelay: 250, });
-    };
+new SimpleLightbox(".gallery a", { captionsData: `alt`, captionDelay: 250 });

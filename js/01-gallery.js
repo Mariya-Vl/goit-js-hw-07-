@@ -30,17 +30,22 @@ gallery.addEventListener("click", clickOnImg);
 
 let instance = "";
 
-// функція для відкриття модалки:
+// функція для відкриття "модалки":
 function clickOnImg(evt) {
   evt.preventDefault();
   if (evt.target === evt.currentTarget) {
     return;
   }
-  instance = basicLightbox.create(`
-<div>
-<img src="${evt.target.dataset.source}" width="800" height="600">
-/div>
-`);
+  instance = basicLightbox.create(
+    `<img src="${evt.target.dataset.source}" width="800" height="600">`,
+    // {
+    //   onShow: (instance) => {},
+    //   onClose: (instance) => {
+    //     gallery.removeEventListener("keydown", pressEsc),
+    //       gallery.removeEventListener("click", clickOnImg);
+    //   },
+    // }
+  );
   instance.show();
 }
 
@@ -51,6 +56,6 @@ function pressEsc(evt) {
   const visible = basicLightbox.visible();
   if (evt.code === "Escape" && visible) {
     instance.close();
-    gallery.removeEventListener("click", clickOnImg);
+    gallery.removeEventListener("keydown", pressEsc);
   }
 }
