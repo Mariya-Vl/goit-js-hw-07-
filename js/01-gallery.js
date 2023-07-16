@@ -38,24 +38,21 @@ function clickOnImg(evt) {
   }
   instance = basicLightbox.create(
     `<img src="${evt.target.dataset.source}" width="800" height="600">`,
-    // {
-    //   onShow: (instance) => {},
-    //   onClose: (instance) => {
-    //     gallery.removeEventListener("keydown", pressEsc),
-    //       gallery.removeEventListener("click", clickOnImg);
-    //   },
-    // }
+    {
+      onShow: (instance) => {
+        document.addEventListener("keydown", pressEsc);
+      },
+      onClose: (instance) => {
+        document.removeEventListener("keydown", pressEsc);
+      },
+    }
   );
   instance.show();
 }
 
-document.addEventListener("keydown", pressEsc);
-
 // функція для закриття модалки:
 function pressEsc(evt) {
-  const visible = basicLightbox.visible();
-  if (evt.code === "Escape" && visible) {
+  if (evt.code === "Escape") {
     instance.close();
-    gallery.removeEventListener("keydown", pressEsc);
   }
 }
